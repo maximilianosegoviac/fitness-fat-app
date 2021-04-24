@@ -1,21 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler'
+
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+// Navegación
+import { createStackNavigator } from "@react-navigation/stack"
+import { NavigationContainer } from "@react-navigation/native"
+
+//screens
+import Home from './screens/Home';
+import Detalle from './screens/Detalle';
+
+const Stack = createStackNavigator()
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: "#fff",
+                    
+                },
+                headerTitleAlign: 'center',
+                headerTintColor: "#000",
+                headerTitleStyle: {
+                    fontWeight: "bold",
+                },
+            }}
+          >
+
+            <Stack.Screen
+                name="Home"
+                component={Home}
+                options={{ title: "Fitness Fat"}}
+               
+            />
+            <Stack.Screen
+                name="Detalle"
+                component={Detalle}
+                options={{ title: "Fitness Fat", headerBackTitle: 'Atrás'}}
+               
+            />
+           
+
+          </Stack.Navigator>
+        </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
